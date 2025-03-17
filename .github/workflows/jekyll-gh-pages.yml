@@ -30,10 +30,14 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: Build React App
+        run: |
+          npm install
+          npm run build
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ./
+          source: ./src
           destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
