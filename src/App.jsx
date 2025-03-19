@@ -10,7 +10,11 @@ class App extends Component {
       modif: ["m", "", "7", "9"],
       history: [],
       currentChords: [],
-      num: 1
+      num: 1,
+      perMin: 20,
+      perMaj: 50,
+      per7: 20,
+      per9: 10
     };
   }
 
@@ -27,12 +31,23 @@ class App extends Component {
     this.setState({ num: event.target.value });
   }
 
+  handleChangePer= (event) => {
+    let name = event.target.name;
+    let value = event.target.value;
+    this.setState({ [name]: value });
+  }
+
   generateChords = () => {
     let chords = [];
+    let modif = this.state.modif;
+    modif.push(...Array(this.state.perMin-1).fill("m"));
+    modif.push(...Array(this.state.perMaj-1).fill(""));
+    modif.push(...Array(this.state.per9-1).fill("9"));
+    modif.push(...Array(this.state.per7-1).fill("7"));
     for (let i = 0; i < this.state.num; i++) {
       let chord = this.state.chord[Math.floor(Math.random() * this.state.chord.length)];
       chord += this.state.sharp[Math.floor(Math.random() * this.state.sharp.length)];
-      chord += this.state.modif[Math.floor(Math.random() * this.state.modif.length)];
+      chord += modif[Math.floor(Math.random() * this.state.modif.length)];
       chords.push(chord);
     }
     this.setState(
@@ -81,11 +96,30 @@ class App extends Component {
         <div className='container'>
           <div className='void'></div>
           <div className='content'>
-            
-              <div className='generate'>
+            <div className='generate'>
+              <div>
                 <label>Number of chords:  </label>
                 <input value={this.state.num} onChange={this.handleNumChange} type="number" id="chords" name="chords" min="1" max="8"></input>
+              </div>
+              <div>
+                <label htmlFor="perMaj">%M: </label>
+                <input type="text" onChange={this.handleChangePer} value={this.state.perMaj} name='perMaj' />
+              </div>
+              <div>
+                <label htmlFor="perMin">%m: </label>
+                <input type="text" onChange={this.handleChangePer} value={this.state.perMin} name='perMin' />
+              </div>
+              <div>
+                <label htmlFor="per7">%7: </label>
+                <input type="text" onChange={this.handleChangePer} value={this.state.per7} name='per7' />
+              </div>
+              <div>
+                <label htmlFor="per9">%9: </label>
+                <input type="text" onChange={this.handleChangePer} value={this.state.per9} name='per9' />
+              </div>
+              <div>
                 <button onClick={this.generateChords}>Generate</button>
+              </div>
               </div>
               <div className='result'>
                 <div>Result:</div>

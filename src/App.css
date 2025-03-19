@@ -49,3 +49,25 @@ input {
   flex-wrap: wrap;
   overflow-y: auto;
 }
+input, select {
+  color: #bed7ff;
+  background-color: #070030;
+  border: 1px solid #bed7ff;
+  border-radius: 5px;
+  padding: 5px;
+  width: 30px;
+}
+button {
+  background-color: #bed7ff;
+  color: #070030;
+  border: 1px solid #bed7ff;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+.generate {
+  display: flex;
+}
+.generate div {
+  padding: 0 5px;
+}
