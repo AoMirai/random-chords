@@ -79,18 +79,20 @@ class App extends Component {
       <div className="App">
         <h1>Random chords</h1>
         <div className='container'>
-          <div></div>
-          <div className='generate'>
-            <label>Number of chords:  </label>
-            <input value={this.state.num} onChange={this.handleNumChange} type="number" id="chords" name="chords" min="1" max="8"></input>
-            <button onClick={this.generateChords}>Generate</button>
-          </div>
-          <div className='result'>
-            <div>Result:</div>
-            <div id="result"></div>
-          </div>
-          <div className='history'>
-            <div>History:</div>
+          <div className='void'></div>
+          <div className='content'>
+            
+              <div className='generate'>
+                <label>Number of chords:  </label>
+                <input value={this.state.num} onChange={this.handleNumChange} type="number" id="chords" name="chords" min="1" max="8"></input>
+                <button onClick={this.generateChords}>Generate</button>
+              </div>
+              <div className='result'>
+                <div>Result:</div>
+                <div id="result"></div>
+              </div>
+            
+            <div className='history'>History:</div>
             <div id="history"></div>
           </div>
         </div>
