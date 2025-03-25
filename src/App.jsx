@@ -11,9 +11,9 @@ class App extends Component {
       history: [],
       currentChords: [],
       num: 1,
-      perMin: 20,
+      perMin: 30,
       perMaj: 50,
-      per7: 20,
+      per7: 10,
       per9: 10
     };
   }
@@ -39,11 +39,11 @@ class App extends Component {
 
   generateChords = () => {
     let chords = [];
-    let modif = this.state.modif;
-    modif.push(...Array(this.state.perMin-1).fill("m"));
-    modif.push(...Array(this.state.perMaj-1).fill(""));
-    modif.push(...Array(this.state.per9-1).fill("9"));
-    modif.push(...Array(this.state.per7-1).fill("7"));
+    let modif = [];
+    modif.push(...Array(this.state.perMin).fill("m"));
+    modif.push(...Array(this.state.perMaj).fill(""));
+    modif.push(...Array(this.state.per9).fill("9"));
+    modif.push(...Array(this.state.per7).fill("7"));
     for (let i = 0; i < this.state.num; i++) {
       let chord = this.state.chord[Math.floor(Math.random() * this.state.chord.length)];
       chord += this.state.sharp[Math.floor(Math.random() * this.state.sharp.length)];
@@ -103,19 +103,19 @@ class App extends Component {
               </div>
               <div>
                 <label htmlFor="perMaj">%M: </label>
-                <input type="text" onChange={this.handleChangePer} value={this.state.perMaj} name='perMaj' />
+                <input type="number" onChange={this.handleChangePer} value={this.state.perMaj} name='perMaj' />
               </div>
               <div>
                 <label htmlFor="perMin">%m: </label>
-                <input type="text" onChange={this.handleChangePer} value={this.state.perMin} name='perMin' />
+                <input type="number" onChange={this.handleChangePer} value={this.state.perMin} name='perMin' />
               </div>
               <div>
                 <label htmlFor="per7">%7: </label>
-                <input type="text" onChange={this.handleChangePer} value={this.state.per7} name='per7' />
+                <input type="number" onChange={this.handleChangePer} value={this.state.per7} name='per7' />
               </div>
               <div>
                 <label htmlFor="per9">%9: </label>
-                <input type="text" onChange={this.handleChangePer} value={this.state.per9} name='per9' />
+                <input type="number" onChange={this.handleChangePer} value={this.state.per9} name='per9' />
               </div>
               <div>
                 <button onClick={this.generateChords}>Generate</button>
