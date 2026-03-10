@@ -40,10 +40,21 @@ class App extends Component {
   generateChords = () => {
     let chords = [];
     let modif = [];
-    modif.push(...Array(this.state.perMin).fill("m"));
-    modif.push(...Array(this.state.perMaj).fill(""));
-    modif.push(...Array(this.state.per9).fill("9"));
-    modif.push(...Array(this.state.per7).fill("7"));
+    
+    const modifMap = {
+      perMin: 'm',
+      perMaj: '',
+      per9: '9',
+      per7: '7'
+    };
+
+    Object.entries(modifMap).forEach(([key, value]) => {
+      const count = parseInt(this.state[key]);
+      if (count > 0) {
+        modif.push(...Array(count).fill(value));
+      }
+    });
+    
     for (let i = 0; i < this.state.num; i++) {
       let chord = this.state.chord[Math.floor(Math.random() * this.state.chord.length)];
       chord += this.state.sharp[Math.floor(Math.random() * this.state.sharp.length)];
